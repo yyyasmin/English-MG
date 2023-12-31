@@ -1,96 +1,136 @@
 {
-	"gameName":"Fith_grade_has_have_1",
-	"id": 9,
-	"gameCards":[
-		{
-            "id":"89",
-            "name":"has1",
-            "fileFolder":"../../assets/textures/fith_grade_has_have_1/png/png",
-            "fileFullPath":"../../assets/textures/fith_grade_has_have_1/png/has1.png",
-            "fileNameWithSufix":"has1.png",
-            "background":"blue",
-            "text1":"I have a blue pair of shoes",
-            "text2":"יש לי זוג נעליים כחולות",
-            "isFlipped": true
+   "gameName":"Fith_grade_has_have_1",
+   "id": 0,
+   "gameCards":[
+      {
+         "id":"1",
+         "name_1":"h1",
+         "name_2":"h1_have",
+         "name_3":"h1",
+         "correctChoice":"have",
+         "fileNameWithSufix":"h1.png",
+         "background":"blue",
+         "text1":"I have a blue pair of shoes",
+         "text2":"יש לי זוג נעליים כחולות",
+         "isFlipped": true
 
-        },
-        {
-            "id":"90",
-            "name":"has2",
-            "fileFolder":"../../assets/textures/fith_grade_has_have_1/png",
-            "fileFullPath":"../../assets/textures/fith_grade_has_have_1/png/has2.png",
-            "fileNameWithSufix":"has2.png",
-            "background":"brown",
-            "text1":"We have a dog",
-            "text2":"יש לנו כלב",
-            "isFlipped": true
-        },
-        {
-            "id":"91",
-            "name":"has3",
-            "fileFolder":"../../assets/textures/fith_grade_has_have_1/png",
-            "fileFullPath":"../../assets/textures/fith_grade_has_have_1/png/has3.png",
-            "fileNameWithSufix":"has3.png",
-            "background":"gray",
-            "text1":"לאחותי יש חדר שינה גדול",
-            "text2":"My sister has a big bedroom",
-            "isFlipped": true
+      },
+      {
+         "id":"2",
+         "name_1":"h2",
+         "name_2":"h2_have",
+         "name_3":"h2",
+         "correctChoice":"have",
+         "fileNameWithSufix":"h2.png",
+         "background":"brown",
+         "text1":"We have a dog",
+         "text2":"יש לנו כלב",
+         "isFlipped": true
+      },
+      {
+         "id":"3",
+         "name_1":"h3",
+         "name_2":"h3_has",
+         "name_3":"h3",
+         "correctChoice":"has",
+         "fileNameWithSufix":"h3.png",
+         "background":"gray",
+         "text1":"לאחותי יש חדר שינה גדול",
+         "text2":"My sister has a big bedroom",
+         "isFlipped": true
 
-        },
-        {
-            "id":"92",
-            "name":"has4",
-            "fileFolder":"../../assets/textures/fith_grade_has_have_1/png",
-            "fileFullPath":"../../assets/textures/fith_grade_has_have_1/png/has4.png",
-            "fileNameWithSufix":"has4.png",
-            "background":"gray",
-            "text1":"יש לו חתול מחמד",
-            "text2":"He has a pet cat",
-            "isFlipped": true
-        },
-        {
-            "id":"93",
-            "name":"has5",
-            "fileFolder":"../../assets/textures/fith_grade_has_have_1/png",
-            "fileFullPath":"../../assets/textures/fith_grade_has_have_1/png/has5.png",
-            "fileNameWithSufix":"has5.png",
-            "background":"gray",
-            "text1":"למורה יש כמה מחברות",
-            "text2":"The teacher has some notebooks",
-            "isFlipped": true
-        },
-        {
-            "id":"94",
-            "name":"has6",
-            "fileFolder":"../../assets/textures/fith_grade_has_have_1/png",
-            "fileFullPath":"../../assets/textures/fith_grade_has_have_1/png/has6.png",
-            "fileNameWithSufix":"has6.png",
-            "background":"gray",
-            "text1":"יש להם סמדוויץ עם גבינה",
-            "text2":"They have cheese sandwiches",
-            "isFlipped": true
-        },
-        {
-            "id":"95",
-            "name":"has7",
-            "fileFolder":"../../assets/textures/fith_grade_has_have_1/png",
-            "fileFullPath":"../../assets/textures/fith_grade_has_have_1/png/has7.png",
-            "fileNameWithSufix":"has7.png",
-            "background":"gray",
-            "text1":"My parents have a green car",
-            "text2":"להורים שלי יש מכונית ירוקה",
-            "isFlipped": true
-        },
-        {
-            "id":"96",
-            "name":"has8",
-            "fileFolder":"../../assets/textures/fith_grade_has_have_1/png",
-            "fileFullPath":"../../assets/textures/fith_grade_has_have_1/png/has8.png",
-            "fileNameWithSufix":"has8.png",
-            "background":"gray",
-            "text1":"The men have some apples and some oranges",
-            "text2":"לגברים יש כמה תפוחים וכמה תפוזים",
-            "isFlipped": true
-        }
-	]
+      },
+      {
+         "id":"4",
+         "name_1":"h4",
+         "name_2":"h4_has",
+         "name_3":"h4",
+         "correctChoice":"has",
+         "fileNameWithSufix":"h4.png",
+         "background":"gray",
+         "text1":"יש לו חתול מחמד",
+         "text2":"He has a pet cat",
+         "isFlipped": true
+
+      },
+      {
+         "id":"5",
+         "name_1":"h5",
+         "name_2":"h5_has",
+         "name_3":"h5",
+         "correctChoice":"has",
+         "fileNameWithSufix":"h5.png",
+         "background":"gray",
+         "text1":"למורה יש כמה מחברות",
+         "text2":"The teacher has some notebooks",
+         "isFlipped": true
+
+      },
+
+      {
+         "id":"6",
+         "name_1":"h6",
+         "name_2":"h6_have",
+         "name_3":"h6",
+         "correctChoice":"have",
+         "fileNameWithSufix":"h6.png",
+         "background":"gray",
+         "text1":"יש להם סמדוויץ עם גבינה",
+         "text2":"They have cheese sandwiches",
+         "isFlipped": true
+
+      },
+      {
+         "id":"7",
+         "name_1":"h7",
+         "name_2":"h7_have",
+         "name_3":"h7",
+         "correctChoice":"have",
+         "fileNameWithSufix":"h7.png",
+         "background":"gray",
+         "text1":"My parents have a green car",
+         "text2":"להורים שלי יש מכונית ירוקה",
+         "isFlipped": true
+
+      },
+      {
+         "id":"8",
+         "name_1":"h8",
+         "name_2":"h8_have",
+         "name_3":"h8",
+         "correctChoice":"have",
+         "fileNameWithSufix":"h8.png",
+         "background":"gray",
+         "text1":"The men have some apples and some oranges",
+         "text2":"לגברים יש כמה תפוחים וכמה תפוזים",
+         "isFlipped": true
+
+      },
+      {
+         "id":"9",
+         "name_1":"h9",
+         "name_2":"h9_have",
+         "name_3":"h9",
+         "correctChoice":"have",
+         "fileNameWithSufix":"h9.png",
+         "background":"gray",
+         "text1":"You ____ a pair of green shorts",
+         "text2":"יש לו מכנסיים ירוקים",
+         "isFlipped": true
+
+      },
+      {
+         "id":"10",
+         "name_1":"h10",
+         "name_2":"h10_has",
+         "name_3":"h10",
+         "correctChoice":"has",
+         "fileNameWithSufix":"h10.png",
+         "background":"gray",
+         "text1":"It ___ some cat food",
+         "text2":"יש לו אוכל של חתולים",
+         "isFlipped": true
+
+      }
+   ]
 }

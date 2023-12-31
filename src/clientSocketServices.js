@@ -11,6 +11,10 @@ export const emitRemoveMemberFromRoom = ({ playerName, chosenRoom }) => {
   socket.emit('REMOVE_PLAYER_FROM_ROOM', { playerName, chosenRoom });
 };
 
+export const emitRemoveRoomFromActiveRooms = (roomId) => {
+  socket.emit('REMOVE_ROOM_FROM_ACTIVE_ROOMS', roomId);
+};
+
 export const emitCurentRoomChanged = (curentRoom) => {
   socket.emit("CURENT_ROOM_CHANGED", curentRoom);
 };
@@ -19,8 +23,9 @@ export const emitCurentMatchedCards = (cr, matchedCards) => {
   socket.emit("MATCHED_CARDS_CHANGED", cr, matchedCards);
 };
 
-export const emitCurentIsMatched = (cr, isMatched, lastTwoFlippedCards) => {
-  socket.emit("IS_MATCHED_CHANGED", cr, isMatched, lastTwoFlippedCards );
+export const emitCurentIsMatched = (isMatched, last3FlippedCards, have_has_word_idx) => {
+  console.log("IN emitCurentIsMatched -- have_has_word_idx: ", have_has_word_idx)
+  socket.emit("IS_MATCHED_CHANGED", isMatched, last3FlippedCards, have_has_word_idx );
 };
 
 export const emitCurentCardSize = (cr, cardSize) => {
@@ -48,11 +53,13 @@ export const updateMatchedCards = (setMatchedCards) => {
   });
 };
 
-export const updateIsMatched = (setIsMatched, setLastTwoFlippedCards) => {
-  socket.on("UPDATED_IS_MATCHED", (isMatched, lastTwoFlippedCards) => {
-    console.log("IN updateIsMatched -- ON-UPDATED_IS_MATCHED -- lastTwoFlippedCards: ", lastTwoFlippedCards)
+export const updateIsMatched = (setIsMatched, setLast3FlippedCards, setHave_has_word_idx) => {
+  socket.on("UPDATED_IS_MATCHED", (isMatched, last3FlippedCards, have_has_word_idx) => {
+    console.log("IN updateIsMatched -- ON-UPDATED_IS_MATCHED -- last3FlippedCards: ", last3FlippedCards)
+    console.log("IN updateIsMatched -- ON-UPDATED_IS_MATCHED -- have_has_word_idx: ", have_has_word_idx)
     setIsMatched(isMatched);
-    setLastTwoFlippedCards(lastTwoFlippedCards);
+    setLast3FlippedCards(last3FlippedCards);
+    setHave_has_word_idx(have_has_word_idx);
   });
 };
 

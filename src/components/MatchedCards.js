@@ -56,9 +56,11 @@ const CardText = styled.div`
 `;
 
 const MatchedCards = (props) => {
-  const { index, players, card } = props;
+  const { index, players, card , have_has_word_idx} = props;
 
   console.log("MatchCards -- props: ", props)
+  
+
 
   const activePlayerIndex = players.findIndex((player) => player.isActive);
 
@@ -69,7 +71,10 @@ const MatchedCards = (props) => {
 
   const currentPlayer = activePlayerIndex === index ? players[activePlayerIndex] : players[secondPlayerIndex]
 
-  const currentText = activePlayerIndex === index ? card.text1 : card.text2
+  let currentText = activePlayerIndex === index ? card.text1 : card.text2
+  if ( index === have_has_word_idx)  {
+    currentText = ""
+  }
 
   return (
     <CardContainer>

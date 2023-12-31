@@ -1,13 +1,5 @@
-import { Emotions_1 } from "./GameCards/Emotions_1.js";
-import { Emotions_2 } from "./GameCards/Emotions_2.js";
-import { Intimacy_1 } from "./GameCards/Intimacy_1.js";
-import { Calm_1 } from "./GameCards/Calm_1.js";
-import { First_Letter_1 } from "./GameCards/First_Letter_1.js";
-import { Deep_1 } from "./GameCards/Deep_1.js";
-import { Deep_2 } from "./GameCards/Deep_2.js";
-import { Deep_3 } from "./GameCards/Deep_3.js";
-import { Adva } from "./GameCards/Adva.js";
-import { Jana_1 } from "./GameCards/Jana_1.js";
+
+import { Fith_grade_has_have_1 } from "./GameCards/Fith_grade_has_have_1.js";
 
 
 import { shuffle } from "./shuffle"; // Import all exports for images loading
@@ -128,8 +120,8 @@ export const calculateCardSize = (cardsNum) => {
   let gapWidth = totalGapWidth / (cols+1)
   let gapHeight = totalGapHeight / (rows+1)
 
-  let cardWidth = ( containerWidth - (totalGapWidth+1) ) / cols
-  let cardHeight = ( containerHeight - (totalGapHeight+1) ) / rows
+  let cardWidth = ( containerWidth - (totalGapWidth) ) / cols
+  let cardHeight = ( containerHeight - (totalGapHeight) ) / rows
 
     
   //let cardWidth = CARD_RATIO * cardHeight
@@ -151,53 +143,49 @@ export const calculateCardSize = (cardsNum) => {
 
 
 // Initialize cards in rooms from a JSON file based on gameName
-const initCardsInRoomsFromJson = async (rooms) => {
-  for (const room of rooms) {
+const initCardsInRoomsFromJson = async (rooms) =>  {
+  // Get the initial window screen size
+  console.log("IN initCardsInRoomsFromJson -- rooms: ", rooms)
 
-    console.log("initCardsInRoomsFromJson -- room: ", room)
+  for (const room of rooms)  {
 
     const jsonURL = `${CHOSEN_PROXY_URL}/database/GameCards/${room.gameName}.json`;
 
     console.log("initCardsInRoomsFromJson -- jsonURL: ", jsonURL)
 
     const cardsData = await fetchDataFromJSON(jsonURL);
-
+    
     console.log("initCardsInRoomsFromJson -- cardsData: ", cardsData)
-
 
     if (cardsData) {
       let gameCards = cardsData.gameCards || [];
       const importArr = {
-        Emotions_1: Emotions_1,
-        Emotions_2: Emotions_2,
-        Intimacy_1: Intimacy_1,
-        Calm_1: Calm_1,
-        First_Letter_1: First_Letter_1,
-        Deep_1: Deep_1,
-        Deep_2: Deep_2,
-        Deep_3: Deep_3,
-        Adva: Adva,
-        Jana_1: Jana_1
-
-        // Add more gameName mappings as needed
+        Fith_grade_has_have_1: Fith_grade_has_have_1,
       };
 
       if (importArr[room.gameName]) {
         const gameCards1 = gameCards.map((card, index) => ({
           ...card,
           imageImportName: importArr[room.gameName][index][0],
-        })); 
-        console.log("INIT -- initCardsInRoomsFromJson -- gameCards1: ", gameCards1)
-  
+        }));
+
         const gameCards2 = gameCards.map((card, index) => ({
           ...card,
           imageImportName: importArr[room.gameName][index][1],
         }));
-        gameCards = shuffle(gameCards1.concat(gameCards2));
-        room.cardsData = gameCards; 
+
+        const gameCards3 = gameCards.map((card, index) => ({
+          ...card,
+          imageImportName: importArr[room.gameName][index][2],
+        }));
+
+        gameCards = shuffle(gameCards1.concat(gameCards2).concat(gameCards3));
+		room.cardsData = gameCards;
+		console.log("IN init -- room.cardsData: ", room.cardsData)
+        // Calculate card size for the room
         room.cardSize = calculateCardSize(gameCards.length)
-        console.log("INIT -- AFTER SHUFFLE -- room: ", room);
-      }      
+        console.log("IN initCardsInRoomsFromJson -- room.cardSize: ", room.cardSize)
+      }
     }
   }
   return rooms;
