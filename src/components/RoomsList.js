@@ -68,6 +68,7 @@ const RoomsList = ({ userName, roomsInitialData }) => {
   const navigate = useNavigate();
 
   const handleJoinRoom = async (chosenRoom) => {
+    console.log("IN handleJoinRoom -- chosenRoom: ", chosenRoom)
     if ( !isEmpty(userName) )   {
       emitAddMemberToRoom({
         playerName: userName,

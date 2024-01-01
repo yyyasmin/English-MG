@@ -115,6 +115,7 @@ function Game() {
 
   useEffect(() => {
     updateCr(setCr)
+	broadcastChangeCr(currentRoom);
     updateIsMatched(setIsMatched, setLast3FlippedCards, setHave_has_word_idx)
     if (!isEmpty(currentRoom) && !isEmpty(userName)) {
       broadcastChangeCardSize(currentRoom);  // Update Cr is in broadcastChangeCardSize
@@ -125,27 +126,22 @@ function Game() {
   window.onbeforeunload = async function (e) {
     await updatePlayerLeft(setPlayerLeft);
     await updateCr(setCr);
-    if (!isEmpty(userName) && !isEmpty(cr) && !isEmpty(cr.currentPlayers)) {
-      
-      const isLastPlayer = cr.currentPlayers.length === 1 && cr.currentPlayers[0].name === userName;
-      if (isLastPlayer) {
-        console.log("Last player left is leaving the room. Removing the room from activeRooms.");
-        // Remove the room from activeRooms
-        await emitRemoveRoomFromActiveRooms(cr.id);
-      }
-      else  {
-        await emitRemoveMemberFromRoom({
-          playerName: userName,
-          chosenRoom: cr,
-        });
-      }
+    if (!isEmpty(userName) && !isEmpty(cr)) {
+      await emitRemoveMemberFromRoom({
+        playerName: userName,
+        chosenRoom: cr,
+      });
+	  if ( !isEmpty(cr) && cr.currentPlayers==[] ) {
+		emitRemoveRoomFromActiveRooms(cr.id)
+	  }
     }
     var dialogText = 'Are you really sure you want to leave?';
     console.log("Game -- handleBeforeUnload -- dialogText: ", dialogText);
     e.returnValue = dialogText;
     return dialogText;
   };
- 
+  
+   
   useEffect( () => {
     const asyncClear = async() =>  {
       if (clearFlippedCards) {
@@ -222,7 +218,7 @@ function Game() {
     if (!isEmpty(activePlayer) && cr.currentPlayers.length > 1) {
       const updatedPlayers = cr.currentPlayers.map((player) => {
         if (player.name === activePlayer.name) {
-          return { ...activePlayer, flippCount: (isMatched || activePlayer.flippCount>=3) ? 0 : activePlayer.flippCount + 1 };
+          return { ...activePlayer, flippCount: (isMatched || activePlayer.flippCount>=5) ? 0 : activePlayer.flippCount + 1 };
         } else {
           return { ...player };
         }
@@ -254,11 +250,15 @@ function Game() {
       console.log("toggleCardFlip - 3333 - isMatched, CONDITION: ",
                     isMatched,
                     !isEmpty(cr) && !isEmpty(cr.currentPlayers) && 
-                    cr.currentPlayers.length > 1 && activePlayer.flippCount >= 3,
+                    cr.currentPlayers.length > 1 && activePlayer.flippCount >= 5,
                     activePlayer.flippCount
       )
+      
+      if (!isEmpty(cr) && !isEmpty(cr.currentPlayers) && cr.currentPlayers.length > 1 ) {
+        console.log("IN toggleCardFlip --activePlayer: ", activePlayer)
+      }
 
-      if (!isEmpty(cr) && !isEmpty(cr.currentPlayers) && cr.currentPlayers.length > 1 && activePlayer.flippCount >= 3) {
+      if (!isEmpty(cr) && !isEmpty(cr.currentPlayers) && cr.currentPlayers.length > 1 && activePlayer.flippCount >= 5) {
         await togglePlayerTurn();
       }
     }
