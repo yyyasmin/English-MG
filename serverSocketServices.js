@@ -2,6 +2,8 @@
 let activeRooms = [];  // KEEP TRACK OF PLAYERS
 // const isEmpty = obj => !Object.keys(obj).length;
 
+console.log("Init Active room:activeRooms --  ", activeRooms)
+
 const updateActiveRoomsWithUpdatedRoom = (updatedRoom) =>  {
   const existingRoomIndex = activeRooms.findIndex((room) => room.id === updatedRoom.id);
   if (existingRoomIndex !== -1) {
@@ -135,6 +137,8 @@ const serverSocketServices = (io) => {
     socket.on("CREATE_ROOM_AND_ADD_PLAYER", ({ playerName, chosenRoom }) => {
       let updatedRoom = {...chosenRoom};
       console.log("ON-CCCCCCCCCCCCCCCCCC -- CREATE_ROOM_AND_ADD_PLAYER -- playerName: ", playerName)
+      console.log("ON-CCCCCCCCCCCCCCCCCC -- CREATE_ROOM_AND_ADD_PLAYER -- init active roon for this player: ", activeRooms)
+
       if (playerName != undefined)  {
         updatedRoom = setRoomToAddPlayer(chosenRoom, playerName)
         updatedRoom = addPlayerToRoom(updatedRoom, playerName, socket.id)

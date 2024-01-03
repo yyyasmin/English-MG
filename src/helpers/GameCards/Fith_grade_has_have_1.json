@@ -9,7 +9,7 @@
          "name_3":"h1",
          "correctChoice":"have",
          "fileNameWithSufix":"h1.png",
-         "background":"blue",
+         "background":"gray",
          "text1":"I have a blue pair of shoes",
          "text2":"יש לי זוג נעליים כחולות",
          "isFlipped": true
@@ -22,7 +22,7 @@
          "name_3":"h2",
          "correctChoice":"have",
          "fileNameWithSufix":"h2.png",
-         "background":"brown",
+         "background":"gray",
          "text1":"We have a dog",
          "text2":"יש לנו כלב",
          "isFlipped": true

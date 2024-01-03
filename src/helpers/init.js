@@ -5,22 +5,15 @@ import { Fith_grade_has_have_1 } from "./GameCards/Fith_grade_has_have_1.js";
 import { shuffle } from "./shuffle"; // Import all exports for images loading
 import { CHOSEN_PROXY_URL } from "./ServerRoutes.js";
 
-//const MIN_CARD_WIDTH = 150; // Adjust this value based on your design preference
 const TITLE_SIZE = "2.5rem";
-//const CARD_RATIO = 0.8; // WIDTH/HEIGHT
-//const FIXED_GAP_SIZE = 10; // height/width
-
-console.log("init - server - CHOSEN_PROXY_URL: ", CHOSEN_PROXY_URL);
 
 // This function fetches data from a JSON file
 const fetchDataFromJSON = async (filePath) => {
   try {
     const response = await fetch(filePath);
     const data = await response.json();
-    console.log("INIT -- fetchDataFromJSON -- data: ", data)
     return data;
   } catch (error) {
-    console.error("Error fetching data from JSON file:", error);
     return null;
   }
 };
@@ -38,8 +31,6 @@ export const calculateCardSize = (cardsNum) => {
   const containerWidth = initialSize.width;
   const containerHeight = initialSize.height;
   let cols, rows
-
-  console.log("IN calculateCardSize -- cardsNum: ", cardsNum)
 
   switch(cardsNum)  {
     case 8:
@@ -122,10 +113,7 @@ export const calculateCardSize = (cardsNum) => {
 
   let cardWidth = ( containerWidth - (totalGapWidth) ) / cols
   let cardHeight = ( containerHeight - (totalGapHeight) ) / rows
-
     
-  //let cardWidth = CARD_RATIO * cardHeight
-
   const cardSize = {
     card: {
       width: cardWidth,
@@ -137,26 +125,48 @@ export const calculateCardSize = (cardsNum) => {
     },
   };
 
-  console.log("IN calculateCardSize -- cardSize: ", cardSize);
   return cardSize;
+};
+
+
+export const checkFor3CardsMatch = async (card1, card2, card3) => {
+    console.log("IN checkForMatch -- card1, card2, card3: ", card1, card2, card3);
+    let hCardIdx = 0;
+    if (card1.type == 'e_h') {
+        if (card2.name_1 === card3.name_1 && card1.correctChoice == card2.correctChoice) {
+            hCardIdx = 0;
+			console.log("IN checkFor3CardsMatch -- RETURNING:", true, 1);
+			return { isMatched: true, hCardIdx: hCardIdx };
+        }
+    }
+    if (card2.type == 'e_h') {
+        if (card1.name_1 === card3.name_1 && card1.correctChoice == card2.correctChoice) {
+            hCardIdx = 1;
+            console.log("IN checkFor3CardsMatch -- RETURNING:", true, 1);
+			return { isMatched: true, hCardIdx: hCardIdx };
+        }
+    }
+    if (card3.type == 'e_h') {
+        if (card1.name_1 === card2.name_1 && card3.correctChoice == card1.correctChoice) {
+            hCardIdx = 2;
+            console.log("IN checkFor3CardsMatch -- RETURNING", true, 2);
+			return { isMatched: true, hCardIdx: hCardIdx };
+        }
+    }
+    console.log("IN checkFor3CardsMatch -- RETURNING FALSE");
+	return { isMatched: false, hCardIdx: hCardIdx };
 };
 
 
 // Initialize cards in rooms from a JSON file based on gameName
 const initCardsInRoomsFromJson = async (rooms) =>  {
-  // Get the initial window screen size
-  console.log("IN initCardsInRoomsFromJson -- rooms: ", rooms)
 
   for (const room of rooms)  {
 
     const jsonURL = `${CHOSEN_PROXY_URL}/database/GameCards/${room.gameName}.json`;
 
-    console.log("initCardsInRoomsFromJson -- jsonURL: ", jsonURL)
-
     const cardsData = await fetchDataFromJSON(jsonURL);
     
-    console.log("initCardsInRoomsFromJson -- cardsData: ", cardsData)
-
     if (cardsData) {
       let gameCards = cardsData.gameCards || [];
       const importArr = {
@@ -166,25 +176,28 @@ const initCardsInRoomsFromJson = async (rooms) =>  {
       if (importArr[room.gameName]) {
         const gameCards1 = gameCards.map((card, index) => ({
           ...card,
+		  type: "pic",
+          background: "red",
           imageImportName: importArr[room.gameName][index][0],
         }));
 
         const gameCards2 = gameCards.map((card, index) => ({
           ...card,
+		  type: "e_h",
+          background: "blue",
           imageImportName: importArr[room.gameName][index][1],
         }));
 
         const gameCards3 = gameCards.map((card, index) => ({
           ...card,
+		  type: "e_text",
+          background: "yellow",
           imageImportName: importArr[room.gameName][index][2],
         }));
-
+		
         gameCards = shuffle(gameCards1.concat(gameCards2).concat(gameCards3));
 		room.cardsData = gameCards;
-		console.log("IN init -- room.cardsData: ", room.cardsData)
-        // Calculate card size for the room
         room.cardSize = calculateCardSize(gameCards.length)
-        console.log("IN initCardsInRoomsFromJson -- room.cardSize: ", room.cardSize)
       }
     }
   }
@@ -209,7 +222,6 @@ const initRoomsFromJson = async () => {
 
 // Export a function that initializes rooms with cardsData
 export const initRoomsFunc = async () => {
-  console.log("11-11-11-11");
   let rooms = await initRoomsFromJson();
   rooms = await initCardsInRoomsFromJson(rooms); // Make sure to await this function
   return rooms;
